@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja Digital Premium - Contas Premium e VIP</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Cabeçalho da Loja -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">🛍️ Loja Digital Premium</h1>
+            <p class="tagline">Contas Premium de Qualidade</p>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="container">
+        <!-- Seção de Produtos -->
+        <section class="products-section">
+            <h2>Nossos Produtos</h2>
+            <div class="products-grid" id="productsGrid">
+                <!-- Produtos serão inseridos aqui pelo JavaScript -->
+            </div>
+        </section>
+
+        <!-- Seção de Pagamento -->
+        <section class="payment-section">
+            <h2>Forma de Pagamento</h2>
+            <div class="payment-container">
+                <div class="payment-method">
+                    <h3>💳 Pix</h3>
+                    <p class="payment-label">Chave Pix:</p>
+                    <p class="pix-key" id="pixKey">CHAVE_PIX_AQUI</p>
+                    <button class="copy-btn" onclick="copiarChavePix()">Copiar Chave</button>
+                </div>
+
+                <div class="payment-method">
+                    <h3>📱 QR Code Pix</h3>
+                    <div class="qr-code-container" id="qrCodeContainer">
+                        <div class="qr-placeholder">
+                            <p>Espaço reservado para QR Code</p>
+                            <small>Substitua a imagem depois</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="payment-instructions">
+                <h3>📋 Como Comprar:</h3>
+                <ol>
+                    <li>Escolha o produto desejado</li>
+                    <li>Clique no botão "Comprar"</li>
+                    <li>Realize o pagamento via Pix</li>
+                    <li>Envie o comprovante no WhatsApp</li>
+                    <li>Receba sua conta em poucos minutos!</li>
+                </ol>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <p>&copy; 2025 Loja Digital Premium. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Script -->
+    <script src="script.js"></script>
+</body>
+</html>
