@@ -34,10 +34,35 @@ body {
     background-color: #fafafa;
     color: var(--text-dark);
     line-height: 1.6;
+    overflow-x: hidden;
 }
 
 html {
     scroll-behavior: smooth;
+}
+
+/* ===========================
+   SISTEMA DE TELAS
+   =========================== */
+
+.screen {
+    display: none;
+    min-height: 100vh;
+    animation: fadeIn 0.3s ease;
+}
+
+.screen.active {
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 /* ===========================
@@ -48,10 +73,11 @@ html {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    width: 100%;
 }
 
 /* ===========================
-   CABEÇALHO
+   CABEÇALHO VITRINE
    =========================== */
 
 .header {
@@ -81,6 +107,46 @@ html {
 }
 
 /* ===========================
+   CABEÇALHO PAGAMENTO
+   =========================== */
+
+.payment-header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    color: var(--white);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: var(--shadow-lg);
+}
+
+.payment-header h1 {
+    font-size: 1.5rem;
+    flex: 1;
+    text-align: center;
+}
+
+.back-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-weight: 600;
+}
+
+.back-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.placeholder {
+    width: 50px;
+}
+
+/* ===========================
    SEÇÕES
    =========================== */
 
@@ -106,7 +172,7 @@ section h2 {
 
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 25px;
     margin-bottom: 40px;
 }
@@ -119,6 +185,7 @@ section h2 {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
+    cursor: pointer;
 }
 
 .product-card:hover {
@@ -220,39 +287,35 @@ section h2 {
 }
 
 /* ===========================
-   SEÇÃO DE PAGAMENTO
+   TELA DE PAGAMENTO
    =========================== */
 
-.payment-section {
-    background: var(--white);
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: var(--shadow);
-    margin-bottom: 60px;
-}
-
 .payment-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    margin-bottom: 40px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;
 }
 
-.payment-method {
-    background: var(--gray-light);
-    padding: 25px;
-    border-radius: 10px;
+.payment-content {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 40px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: var(--shadow-lg);
+}
+
+.product-info {
     text-align: center;
-    border: 2px solid var(--gray-medium);
-    transition: border-color 0.3s ease;
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 2px solid var(--gray-light);
 }
 
-.payment-method:hover {
-    border-color: var(--primary-color);
-}
-
-.payment-method h3 {
-    font-size: 1.3rem;
+.product-info h2 {
+    font-size: 1.8rem;
     margin-bottom: 15px;
     color: var(--text-dark);
 }
@@ -260,58 +323,50 @@ section h2 {
 .payment-label {
     font-size: 0.9rem;
     color: var(--text-light);
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.pix-key {
-    font-family: 'Courier New', monospace;
-    font-size: 1.1rem;
-    font-weight: 600;
+.payment-amount {
+    font-size: 2.5rem;
+    font-weight: 700;
     color: var(--primary-color);
-    word-break: break-all;
-    margin-bottom: 15px;
-    padding: 10px;
-    background: var(--white);
-    border-radius: 6px;
-    border: 1px solid var(--gray-medium);
 }
 
-.copy-btn {
-    padding: 10px 20px;
-    background-color: var(--primary-color);
-    color: var(--white);
-    border: none;
-    border-radius: 6px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 100%;
+.payment-amount span {
+    display: inline-block;
 }
 
-.copy-btn:hover {
-    background-color: var(--primary-dark);
+/* ===========================
+   SEÇÃO QR CODE
+   =========================== */
+
+.qr-section {
+    margin-bottom: 40px;
+    text-align: center;
 }
 
 .qr-code-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 280px;
+    margin-top: 15px;
 }
 
 .qr-placeholder {
-    background: var(--white);
+    background: var(--gray-light);
     border: 2px dashed var(--gray-medium);
     border-radius: 8px;
     padding: 40px 20px;
     text-align: center;
     width: 100%;
+    max-width: 300px;
 }
 
 .qr-placeholder p {
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: var(--text-light);
     margin-bottom: 8px;
 }
@@ -325,33 +380,113 @@ section h2 {
     max-width: 100%;
     height: auto;
     border-radius: 8px;
+    max-width: 300px;
 }
 
 /* ===========================
-   INSTRUÇÕES DE PAGAMENTO
+   SEÇÃO CHAVE PIX
    =========================== */
 
-.payment-instructions {
+.pix-section {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.pix-key-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.pix-key {
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    word-break: break-all;
+    padding: 15px;
+    background: var(--gray-light);
+    border-radius: 8px;
+    border: 1px solid var(--gray-medium);
+}
+
+.copy-btn {
+    padding: 12px 20px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.copy-btn:hover {
+    background-color: var(--primary-dark);
+    transform: scale(1.02);
+}
+
+.copy-btn:active {
+    transform: scale(0.98);
+}
+
+/* ===========================
+   INSTRUÇÕES
+   =========================== */
+
+.instructions {
     background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(129, 140, 248, 0.1) 100%);
-    padding: 25px;
+    padding: 20px;
     border-radius: 10px;
     border-left: 4px solid var(--primary-color);
+    margin-bottom: 30px;
 }
 
-.payment-instructions h3 {
+.instructions h3 {
     color: var(--text-dark);
-    margin-bottom: 15px;
-    font-size: 1.1rem;
+    margin-bottom: 12px;
+    font-size: 1rem;
 }
 
-.payment-instructions ol {
+.instructions ol {
     margin-left: 20px;
+    text-align: left;
 }
 
-.payment-instructions li {
-    margin-bottom: 10px;
+.instructions li {
+    margin-bottom: 8px;
     color: var(--text-dark);
-    line-height: 1.8;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* ===========================
+   BOTÃO DE CONFIRMAÇÃO
+   =========================== */
+
+.confirm-btn {
+    width: 100%;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, var(--success-color) 0%, #059669 100%);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: var(--shadow);
+}
+
+.confirm-btn:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-lg);
+}
+
+.confirm-btn:active {
+    transform: scale(0.98);
 }
 
 /* ===========================
@@ -363,7 +498,7 @@ section h2 {
     color: var(--white);
     text-align: center;
     padding: 30px 20px;
-    margin-top: 60px;
+    margin-top: auto;
     font-size: 0.95rem;
 }
 
@@ -421,21 +556,17 @@ section h2 {
         grid-template-columns: 1fr;
     }
 
-    .payment-section {
+    .payment-content {
         padding: 25px;
-    }
-
-    .payment-container {
-        grid-template-columns: 1fr;
-    }
-
-    .payment-instructions {
-        padding: 20px;
     }
 
     .header {
         padding: 30px 20px;
         margin-bottom: 30px;
+    }
+
+    .payment-amount {
+        font-size: 2rem;
     }
 
     .notification {
@@ -463,7 +594,35 @@ section h2 {
         padding: 0 15px;
     }
 
-    .payment-section {
+    .payment-content {
         padding: 20px;
+    }
+
+    .payment-header {
+        padding: 15px;
+    }
+
+    .payment-header h1 {
+        font-size: 1.2rem;
+    }
+
+    .product-info h2 {
+        font-size: 1.5rem;
+    }
+
+    .payment-amount {
+        font-size: 1.8rem;
+    }
+
+    .qr-placeholder {
+        padding: 30px 15px;
+    }
+
+    .instructions {
+        padding: 15px;
+    }
+
+    .instructions li {
+        font-size: 0.9rem;
     }
 }

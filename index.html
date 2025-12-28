@@ -7,37 +7,55 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Cabeçalho da Loja -->
-    <header class="header">
-        <div class="container">
-            <h1 class="logo">🛍️ Loja Digital Premium</h1>
-            <p class="tagline">Contas Premium de Qualidade</p>
-        </div>
-    </header>
-
-    <!-- Conteúdo Principal -->
-    <main class="container">
-        <!-- Seção de Produtos -->
-        <section class="products-section">
-            <h2>Nossos Produtos</h2>
-            <div class="products-grid" id="productsGrid">
-                <!-- Produtos serão inseridos aqui pelo JavaScript -->
+    <!-- TELA 1: VITRINE DE PRODUTOS -->
+    <div id="storeScreen" class="screen active">
+        <!-- Cabeçalho da Loja -->
+        <header class="header">
+            <div class="container">
+                <h1 class="logo">🛍️ Loja Digital Premium</h1>
+                <p class="tagline">Contas Premium de Qualidade</p>
             </div>
-        </section>
+        </header>
 
-        <!-- Seção de Pagamento -->
-        <section class="payment-section">
-            <h2>Forma de Pagamento</h2>
-            <div class="payment-container">
-                <div class="payment-method">
-                    <h3>💳 Pix</h3>
-                    <p class="payment-label">Chave Pix:</p>
-                    <p class="pix-key" id="pixKey">CHAVE_PIX_AQUI</p>
-                    <button class="copy-btn" onclick="copiarChavePix()">Copiar Chave</button>
+        <!-- Conteúdo Principal -->
+        <main class="container">
+            <!-- Seção de Produtos -->
+            <section class="products-section">
+                <h2>Nossos Produtos</h2>
+                <div class="products-grid" id="productsGrid">
+                    <!-- Produtos serão inseridos aqui pelo JavaScript -->
+                </div>
+            </section>
+        </main>
+
+        <!-- Rodapé -->
+        <footer class="footer">
+            <p>&copy; 2025 Loja Digital Premium. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <!-- TELA 2: PAGAMENTO PIX -->
+    <div id="paymentScreen" class="screen">
+        <header class="payment-header">
+            <button class="back-btn" onclick="voltarParaLoja()">← Voltar</button>
+            <h1>Pagamento</h1>
+            <div class="placeholder"></div>
+        </header>
+
+        <main class="payment-container">
+            <div class="payment-content">
+                <!-- Informações do Produto -->
+                <div class="product-info">
+                    <h2 id="paymentProductName">Conta Premium</h2>
+                    <p class="payment-label">Valor a pagar:</p>
+                    <div class="payment-amount">
+                        <span id="paymentProductPrice">R$ 25,00</span>
+                    </div>
                 </div>
 
-                <div class="payment-method">
-                    <h3>📱 QR Code Pix</h3>
+                <!-- QR Code Pix -->
+                <div class="qr-section">
+                    <p class="payment-label">Escaneie o QR Code:</p>
                     <div class="qr-code-container" id="qrCodeContainer">
                         <div class="qr-placeholder">
                             <p>Espaço reservado para QR Code</p>
@@ -45,25 +63,39 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="payment-instructions">
-                <h3>📋 Como Comprar:</h3>
-                <ol>
-                    <li>Escolha o produto desejado</li>
-                    <li>Clique no botão "Comprar"</li>
-                    <li>Realize o pagamento via Pix</li>
-                    <li>Envie o comprovante no WhatsApp</li>
-                    <li>Receba sua conta em poucos minutos!</li>
-                </ol>
-            </div>
-        </section>
-    </main>
+                <!-- Chave Pix -->
+                <div class="pix-section">
+                    <p class="payment-label">Ou copie a chave Pix:</p>
+                    <div class="pix-key-container">
+                        <p class="pix-key" id="pixKey">CHAVE_PIX_AQUI</p>
+                        <button class="copy-btn" onclick="copiarChavePix()">📋 Copiar Chave</button>
+                    </div>
+                </div>
 
-    <!-- Rodapé -->
-    <footer class="footer">
-        <p>&copy; 2025 Loja Digital Premium. Todos os direitos reservados.</p>
-    </footer>
+                <!-- Instruções -->
+                <div class="instructions">
+                    <h3>📋 Como Pagar:</h3>
+                    <ol>
+                        <li>Escaneie o QR Code ou copie a chave Pix</li>
+                        <li>Realize o pagamento no seu banco</li>
+                        <li>Clique em "Já paguei" abaixo</li>
+                        <li>Envie o comprovante no WhatsApp</li>
+                    </ol>
+                </div>
+
+                <!-- Botão de Confirmação -->
+                <button class="confirm-btn" onclick="abrirWhatsAppAposPagamento()">
+                    ✅ Já paguei - Enviar comprovante
+                </button>
+            </div>
+        </main>
+
+        <!-- Rodapé -->
+        <footer class="footer">
+            <p>&copy; 2025 Loja Digital Premium. Todos os direitos reservados.</p>
+        </footer>
+    </div>
 
     <!-- Script -->
     <script src="script.js"></script>

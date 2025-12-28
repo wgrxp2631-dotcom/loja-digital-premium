@@ -24,6 +24,59 @@ const produtos = [
 const whatsappNumber = '5599999999999'; // Número do WhatsApp
 const pixKey = 'CHAVE_PIX_AQUI'; // Chave Pix
 
+// Variável para armazenar o produto selecionado
+let produtoSelecionado = null;
+
+// ===========================
+// FUNÇÕES DE NAVEGAÇÃO
+// ===========================
+
+/**
+ * Mostra a tela de vitrine de produtos
+ */
+function mostrarTelaLoja() {
+    document.getElementById('storeScreen').classList.add('active');
+    document.getElementById('paymentScreen').classList.remove('active');
+    window.scrollTo(0, 0);
+}
+
+/**
+ * Mostra a tela de pagamento
+ */
+function mostrarTelaPagamento(produtoId) {
+    const produto = produtos.find(p => p.id === produtoId);
+    
+    if (!produto) {
+        mostrarNotificacao('Produto não encontrado!', 'error');
+        return;
+    }
+
+    if (produto.estoque <= 0) {
+        mostrarNotificacao('Este produto está esgotado!', 'error');
+        return;
+    }
+
+    // Armazena o produto selecionado
+    produtoSelecionado = produto;
+
+    // Atualiza as informações na tela de pagamento
+    document.getElementById('paymentProductName').textContent = produto.nome;
+    document.getElementById('paymentProductPrice').textContent = `R$ ${produto.preco.toFixed(2)}`;
+
+    // Muda para a tela de pagamento
+    document.getElementById('storeScreen').classList.remove('active');
+    document.getElementById('paymentScreen').classList.add('active');
+    window.scrollTo(0, 0);
+}
+
+/**
+ * Volta para a tela da loja
+ */
+function voltarParaLoja() {
+    produtoSelecionado = null;
+    mostrarTelaLoja();
+}
+
 // ===========================
 // FUNÇÕES PRINCIPAIS
 // ===========================
@@ -65,7 +118,7 @@ function criarCartaoProduto(produto) {
             <div class="product-actions">
                 <button 
                     class="buy-btn" 
-                    onclick="abrirWhatsApp(${produto.id})"
+                    onclick="mostrarTelaPagamento(${produto.id})"
                     ${temEstoque ? '' : 'disabled'}
                 >
                     ${temEstoque ? '🛒 Comprar' : '❌ Esgotado'}
@@ -78,23 +131,16 @@ function criarCartaoProduto(produto) {
 }
 
 /**
- * Abre o WhatsApp com mensagem pré-preenchida
+ * Abre o WhatsApp após confirmação de pagamento
  */
-function abrirWhatsApp(produtoId) {
-    const produto = produtos.find(p => p.id === produtoId);
-    
-    if (!produto) {
-        mostrarNotificacao('Produto não encontrado!', 'error');
-        return;
-    }
-
-    if (produto.estoque <= 0) {
-        mostrarNotificacao('Este produto está esgotado!', 'error');
+function abrirWhatsAppAposPagamento() {
+    if (!produtoSelecionado) {
+        mostrarNotificacao('Erro: Produto não selecionado', 'error');
         return;
     }
 
     // Mensagem pré-preenchida
-    const mensagem = `Olá! Gostaria de comprar a ${produto.nome} por R$ ${produto.preco.toFixed(2)}. 😊`;
+    const mensagem = `Olá! Já realizei o pagamento Pix de R$ ${produtoSelecionado.preco.toFixed(2)} pela ${produtoSelecionado.nome}. 😊`;
     const mensagemCodificada = encodeURIComponent(mensagem);
 
     // URL do WhatsApp
@@ -151,6 +197,7 @@ function atualizarChavePix() {
 function inicializar() {
     renderizarProdutos();
     atualizarChavePix();
+    mostrarTelaLoja();
 }
 
 // ===========================
@@ -196,5 +243,13 @@ COMO EDITAR O SITE:
    - Procure por: <div class="qr-placeholder">
    - Substitua por: <img src="caminho-da-imagem-qr-code.png" alt="QR Code Pix">
    - Coloque a imagem do QR Code na pasta do projeto
+
+FLUXO DO SITE:
+1. Usuário vê a vitrine com todos os produtos
+2. Clica em "Comprar" em um produto
+3. Abre a tela de pagamento apenas daquele produto
+4. Mostra QR Code grande e chave Pix
+5. Após pagar, clica "Já paguei"
+6. Abre WhatsApp com mensagem pronta para enviar comprovante
 
 */
